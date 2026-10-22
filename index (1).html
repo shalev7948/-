@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>go-sub · פורטל האנימה הישראלי</title>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="ticker-wrap">
+    <div class="ticker">
+      <span>🔥 חדש באתר: העונה החדשה של ג'וג'וטסו קייסן עלתה! &nbsp;&nbsp;•&nbsp;&nbsp; ⚔️ צייד השדים - סרט חדש בקרוב &nbsp;&nbsp;•&nbsp;&nbsp; 🏆 טורניר האנימות של go-sub מתחיל הערב! &nbsp;&nbsp;•&nbsp;&nbsp; 🎬 פרירן שברה שיאי צפייה באתר!</span>
+    </div>
+  </div>
+
+  <header class="top-header">
+    <div class="header-inner">
+      <div class="header-right">
+        <a href="#home" class="logo"><span class="logo-icon">▶</span> go-sub</a>
+      </div>
+      <div class="header-center">
+        <div class="header-search">
+          <input type="text" id="global-search" placeholder="חפש אנימה, סדרה או ז'אנר..." oninput="handleGlobalSearch(this.value)" />
+          <button class="search-btn" onclick="doSearch()">חיפוש</button>
+        </div>
+      </div>
+      <div class="header-left" id="auth-area"></div>
+    </div>
+  </header>
+
+  <nav class="main-nav">
+    <div class="nav-inner">
+      <ul class="nav-links" id="main-nav-links">
+        <li><a href="#home" class="nav-link" data-nav="home">בית</a></li>
+        <li><a href="#catalog" class="nav-link" data-nav="catalog">ספריית אנימה</a></li>
+        <li><a href="#community" class="nav-link" data-nav="community">פורום קהילה</a></li>
+        <li><a href="#my-list" class="nav-link" data-nav="my-list">הרשימה שלי</a></li>
+      </ul>
+      <div class="nav-extra">
+        <a href="javascript:void(0)" onclick="goRandom()">🎲 אנימה אקראית</a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="app" class="full-width-container"></main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-col">
+        <a href="#home" class="logo"><span class="logo-icon">▶</span> go-sub</a>
+        <p>פורטל האנימה הגדול בישראל. צפייה ישירה בחינם, קהילה תוססת ואלפי פרקים מחכים לך.</p>
+      </div>
+      <div class="footer-col">
+        <h4>ניווט</h4>
+        <ul>
+          <li><a href="#home">דף הבית</a></li>
+          <li><a href="#catalog">ספריית אנימה</a></li>
+          <li><a href="#community">פורום קהילה</a></li>
+          <li><a href="#my-list">הרשימה שלי</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>קהילה</h4>
+        <ul>
+          <li><a href="javascript:void(0)" onclick="openInfoModal('דיסקורד', 'הצטרפו לשרת הדיסקורד שלנו כדי לדבר עם שאר חברי הקהילה, לשחק ולקבל עדכונים בזמן אמת.')">דיסקורד</a></li>
+          <li><a href="javascript:void(0)" onclick="openInfoModal('טלגרם', 'עקבו אחרי ערוץ הטלגרם שלנו לעדכונים על פרקים חדשים ואנימות שיתווספו לאתר.')">טלגרם</a></li>
+          <li><a href="javascript:void(0)" onclick="openInfoModal('בקשות אנימה', 'רוצים לראות אנימה מסוימת באתר? פתחו פוסט בפורום הקהילה תחת הקטגוריה המתאימה.')">בקשות אנימה</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>מידע</h4>
+        <ul>
+          <li><a href="javascript:void(0)" onclick="openInfoModal('תקנון האתר', 'אין להעלות תכנים פוגעניים או לא חוקיים. כל התוכן באתר מובא לצורכי ביקורת ולמידה בלבד. האתר אינו מאחסן קבצים בשרתיו.')">תקנון האתר</a></li>
+          <li><a href="javascript:void(0)" onclick="openInfoModal('מדיניות פרטיות', 'אנחנו לא אוספים מידע אישי מעבר לשם המשתמש והסיסמה (הנשמרים בדפדפן שלך). אין שימוש בעוגיות מעקב.')">מדיניות פרטיות</a></li>
+          <li><a href="javascript:void(0)" onclick="openInfoModal('צור קשר', 'לכל פנייה, שאלה או בעיה טכנית, אנא פתחו פוסט בפורום תחת תגית מתאימה או פנו למנהלים.')">צור קשר</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2024 go-sub · כל הזכויות שמורות לאנימה ולמפיקים.</span>
+    </div>
+  </footer>
+
+  <dialog id="auth-modal" class="modal">
+    <div class="modal-inner">
+      <button class="modal-close" onclick="closeModal('auth-modal')">✕</button>
+      <div class="modal-body">
+        <h2 id="auth-title">הצטרפות ל-go-sub</h2>
+        <p id="auth-sub" class="modal-sub">צור חשבון כדי להשתתף בקהילה</p>
+        <form id="auth-form" onsubmit="handleAuth(event)">
+          <div class="form-group"><label>שם משתמש</label><input type="text" id="auth-username" required placeholder="השם שלך" /></div>
+          <div class="form-group"><label>סיסמה</label><input type="password" id="auth-password" required placeholder="לפחות 4 תווים" /></div>
+          <p class="form-error" id="auth-error"></p>
+          <button type="submit" class="btn btn-primary w-100" id="auth-submit-btn">הצטרף</button>
+        </form>
+        <p class="auth-switch"><span id="auth-switch-text">יש לך חשבון?</span> <a href="#" onclick="toggleAuthMode(event)" id="auth-switch-link">התחבר</a></p>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog id="post-modal" class="modal">
+    <div class="modal-inner">
+      <button class="modal-close" onclick="closeModal('post-modal')">✕</button>
+      <div class="modal-body">
+        <h2>פוסט חדש</h2>
+        <form id="post-form" onsubmit="handleNewPost(event)">
+          <div class="form-group"><label>כותרת</label><input type="text" id="post-title" required placeholder="על מה תרצה לדבר?" /></div>
+          <div class="form-group"><label>תוכן</label><textarea id="post-content" rows="4" required placeholder="שתף את המחשבות שלך..."></textarea></div>
+          <button type="submit" class="btn btn-primary w-100">פרסם</button>
+        </form>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog id="info-modal" class="modal">
+    <div class="modal-inner">
+      <button class="modal-close" onclick="closeModal('info-modal')">✕</button>
+      <div class="modal-body">
+        <h2 id="info-title">מידע</h2>
+        <p id="info-content" style="color:var(--text-muted); line-height:1.8; margin-top:16px;">תוכן המידע יופיע כאן.</p>
+      </div>
+    </div>
+  </dialog>
+
+  <script src="script.js"></script>
+</body>
+</html>
